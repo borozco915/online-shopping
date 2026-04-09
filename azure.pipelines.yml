@@ -1,42 +1,48 @@
+# File: azure-pipelines.yml
 trigger:
-  branches:
-    include:
-      - main
-      - dev
+- main  # Replace with your branch
 
 variables:
-  imageName: taskmanager
+  imageTag: '29'  # You can make this dynamic later, e.g., $(Build.BuildId)
 
 stages:
-- stage: Build
+- stage: BuildPushDeploy
+  displayName: Build, Push Docker Image & Deploy
   jobs:
-  - job: BuildImage
+  - job: BuildAndPush
+    displayName: Build & Push Docker Image to ACR
     pool:
-      name: 'Default'   # 👈 CHANGE THIS
-    steps:
+      name: 'Default'  # Replace with the name of your self-hosted agent
 
-    - script: echo "Running on self-hosted agent"
-      displayName: 'Verify Agent'
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Login to Azure'
+      inputs:
+        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'  # Azure DevOps service connection
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          echo "Azure CLI ready"
 
     - task: Docker@2
+      displayName: 'Build and Push Docker image to ACR'
       inputs:
-        containerRegistry: 'shoppingacr123'
-        repository: '$(imageName)'
+        containerRegistry: 'shoppingacr123'  # Use the ACR service connection name
+        repository: 'taskmanager'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: |
-          $(Build.BuildId)
+        tags: '$(imageTag)'
 
-- stage: Deploy
-  dependsOn: Build
-  jobs:
-  - job: DeployToAzure
+  - job: Deploy
+    displayName: Deploy Docker Image to Azure Web App
+    dependsOn: BuildAndPush
     pool:
-      name: 'Default'   # 👈 ALSO CHANGE HERE
+      name: 'Default'  # Self-hosted agent for deployment
     steps:
-
     - task: AzureWebAppContainer@1
+      displayName: 'Deploy Docker Image to Web App'
       inputs:
-        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
-        appName: 'taskmanager-app'
-        containers: '$(imageName):$(Build.BuildId)'
+        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'  # Service connection with permissions
+        appName: 'taskmanager-app'  # Your Web App name
+        containers: |
+          shoppingacr123.azurecr.io/taskmanager:$(imageTag)
