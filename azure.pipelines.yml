@@ -37,6 +37,6 @@ stages:
 
     - task: AzureWebAppContainer@1
       inputs:
-        azureSubscription: 'Azure-Service-Connection'
+        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
         appName: 'taskmanager-app'
         containers: '$(imageName):$(Build.BuildId)'
