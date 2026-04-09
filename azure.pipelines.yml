@@ -3,7 +3,7 @@ trigger:
 - main  # Replace with your branch
 
 variables:
-  imageTag: '29'  # You can make this dynamic later, e.g., $(Build.BuildId)
+  imageTag: '22'  # You can make this dynamic later, e.g., $(Build.BuildId)
 
 stages:
 - stage: BuildPushDeploy
@@ -28,7 +28,7 @@ stages:
       displayName: 'Build and Push Docker image to ACR'
       inputs:
         containerRegistry: 'shoppingacr123'  # Use the ACR service connection name
-        repository: 'taskmanager'
+        repository: 'borozcoshoppingmicroservices'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(imageTag)'
