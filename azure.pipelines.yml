@@ -26,3 +26,17 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: |
           $(Build.BuildId)
+
+- stage: Deploy
+  dependsOn: Build
+  jobs:
+  - job: DeployToAzure
+    pool:
+      name: 'Default'   # 👈 ALSO CHANGE HERE
+    steps:
+
+    - task: AzureWebAppContainer@1
+      inputs:
+        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
+        appName: 'taskmanager-app'
+        containers: '$(imageName):$(Build.BuildId)'
