@@ -1,0 +1,42 @@
+trigger:
+  branches:
+    include:
+      - main
+      - dev
+
+variables:
+  imageName: taskmanager
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildImage
+    pool:
+      name: 'Default'   # 👈 CHANGE THIS
+    steps:
+
+    - script: echo "Running on self-hosted agent"
+      displayName: 'Verify Agent'
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'shoppingacr123'
+        repository: '$(imageName)'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+
+- stage: Deploy
+  dependsOn: Build
+  jobs:
+  - job: DeployToAzure
+    pool:
+      name: 'Default'   # 👈 ALSO CHANGE HERE
+    steps:
+
+    - task: AzureWebAppContainer@1
+      inputs:
+        azureSubscription: 'Azure-Service-Connection'
+        appName: 'taskmanager-app'
+        containers: '$(imageName):$(Build.BuildId)'
