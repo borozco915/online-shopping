@@ -42,7 +42,7 @@ stages:
     - task: AzureWebAppContainer@1
       displayName: 'Deploy Docker Image to Web App'
       inputs:
-        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'  # Service connection with permissions
-        appName: 'taskmanager-app'  # Your Web App name
-        containers: |
-          shoppingacr123.azurecr.io/taskmanager:$(imageTag)
+       azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
+       appName: 'taskmanager-app'
+       containers: |
+         shoppingacr123.azurecr.io/borozcoshoppingmicroservices:22
