@@ -14,7 +14,14 @@ stages:
     pool:
       name: 'Default'   # 👈 KEY CHANGE
     steps:
-
+    - task: AzureCLI@2
+      displayName: Login to ACR
+      inputs:
+        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az acr login --name shoppingacr123
     - script: |
           docker buildx create --use
 
