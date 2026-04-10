@@ -1,49 +1,53 @@
-# File: azure-pipelines.yml
 trigger:
-- main  # Replace with your branch
+- main
 
 variables:
-  imageTag: '22'  # You can make this dynamic later, e.g., $(Build.BuildId)
+  imageName: borozcoshoppingmicroservices
+  acrLoginServer: shoppingacr123.azurecr.io
+  imageTag: $(Build.BuildId)
+  containerAppName: taskmanager-rg
+  resourceGroup: shopping-rg
 
 stages:
-- stage: BuildPushDeploy
-  displayName: Build, Push Docker Image & Deploy
+- stage: BuildAndPush
+  displayName: Build and Push to ACR
   jobs:
-  - job: BuildAndPush
-    displayName: Build & Push Docker Image to ACR
+  - job: Build
     pool:
-      name: 'Default'  # Replace with the name of your self-hosted agent
+      name: 'Default'   # your self-hosted agent
 
     steps:
-    - task: AzureCLI@2
-      displayName: 'Login to Azure'
-      inputs:
-        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'  # Azure DevOps service connection
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          echo "Azure CLI ready"
 
     - task: Docker@2
-      displayName: 'Build and Push Docker image to ACR'
+      displayName: Build and Push Image
       inputs:
-        containerRegistry: 'shoppingacr123'  # Use the ACR service connection name
-        repository: 'borozcoshoppingmicroservices'
-        command: 'buildAndPush'
+        containerRegistry: 'shoppingacr123'
+        repository: $(imageName)
+        command: buildAndPush
         Dockerfile: '**/Dockerfile'
-        tags: '$(imageTag)'
-        arguments: '--platform linux/adm64'
+        tags: |
+          $(imageTag)
+        arguments: '--platform linux/amd64'
 
+- stage: Deploy
+  displayName: Deploy to Azure Container App
+  dependsOn: BuildAndPush
+  jobs:
   - job: Deploy
-    displayName: Deploy Docker Image to Azure Web App
-    dependsOn: BuildAndPush
     pool:
-      name: 'Default'  # Self-hosted agent for deployment
+      name: 'Default'
+
     steps:
-    - task: AzureWebAppContainer@1
-      displayName: 'Deploy Docker Image to Web App'
+
+    - task: AzureCLI@2
+      displayName: Deploy Container App Revision
       inputs:
-       azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
-       appName: 'taskmanager-app'
-       containers: |
-         shoppingacr123.azurecr.io/borozcoshoppingmicroservices:22
+        azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+
+          az containerapp update \
+            --name $CONTAINER_APP_NAME \
+            --resource-group $RESOURCE_GROUP \
+            --image $ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG
