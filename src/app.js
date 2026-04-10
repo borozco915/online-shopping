@@ -1,11 +1,16 @@
 console.log("App starting...");
-console.log("About to listen...");
+
 const express = require('express');
 const app = express();
 
 app.use(express.json());
 
 let tasks = [];
+
+// Health check (IMPORTANT for Azure debugging)
+app.get("/", (req, res) => {
+    res.send("Task Manager API is running 🚀");
+});
 
 // Create Task
 app.post('/tasks', (req, res) => {
@@ -34,26 +39,8 @@ app.delete('/tasks/:id', (req, res) => {
     res.send("Deleted");
 });
 
-try {
-  const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-  console.log("App running on port " + port);
-});
-} catch (err) {
-  console.error("Startup error:", err);
-}
-
-// 👇 ADD THIS
-app.get("/", (req, res) => {
-  res.send("Task Manager API is running 🚀");
-});
-
-// example route (if you have tasks)
-app.get("/tasks", (req, res) => {
-  res.json([{ id: 1, name: "Test task" }]);
-});
-
-app.listen(port, () => {
-  console.log("Server running on port " + port);
+    console.log("Server running on port " + port);
 });
