@@ -2,52 +2,41 @@ trigger:
 - main
 
 variables:
-  imageName: borozcoshoppingmicroservices
-  acrLoginServer: shoppingacr123.azurecr.io
-  imageTag: $(Build.BuildId)
-  containerAppName: taskmanager-rg
-  resourceGroup: shopping-rg
+  imageName: 'taskmanager-app'
+  containerRegistry: 'myacrname.azurecr.io'
+  tag: '$(Build.BuildId)'
 
 stages:
-- stage: BuildAndPush
-  displayName: Build and Push to ACR
+
+- stage: Build
   jobs:
   - job: Build
     pool:
-      name: 'Default'   # your self-hosted agent
-
+      name: 'Default'   # 👈 KEY CHANGE
     steps:
 
     - task: Docker@2
-      displayName: Build and Push Image
+      displayName: Build and Push
       inputs:
-        containerRegistry: 'shoppingacr123'
-        repository: $(imageName)
         command: buildAndPush
-        Dockerfile: '**/Dockerfile'
+        repository: $(imageName)
+        dockerfile: '**/Dockerfile'
+        containerRegistry: 'shoppingacr123'
         tags: |
-          $(imageTag)
-        arguments: '--platform linux/amd64'
+          $(tag)
+          latest
+
 
 - stage: Deploy
-  displayName: Deploy to Azure Container App
-  dependsOn: BuildAndPush
+  dependsOn: Build
   jobs:
   - job: Deploy
     pool:
-      name: 'Default'
-
+      name: 'Default'   # 👈 SAME HERE (optional but common)
     steps:
 
-    - task: AzureCLI@2
-      displayName: Deploy Container App Revision
+    - task: AzureWebAppContainer@1
       inputs:
         azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-
-          az containerapp update \
-            --name $CONTAINER_APP_NAME \
-            --resource-group $RESOURCE_GROUP \
-            --image $ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG
+        appName: 'taskmanager-app'
+        containers: '$(containerRegistry)/$(imageName):$(tag)'
