@@ -35,11 +35,11 @@ app.delete('/tasks/:id', (req, res) => {
 });
 
 try {
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 8080;
 
-  app.listen(port, '0.0.0.0', () => {
-    console.log(`Server running on port ${port}`);
-  });
+app.listen(port, () => {
+  console.log("App running on port " + port);
+});
 } catch (err) {
   console.error("Startup error:", err);
 }
