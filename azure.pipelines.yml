@@ -15,17 +15,15 @@ stages:
       name: 'Default'   # 👈 KEY CHANGE
     steps:
 
-    - task: Docker@2
-      displayName: Build and Push
-      inputs:
-        command: buildAndPush
-        repository: $(imageName)
-        dockerfile: '**/Dockerfile'
-        containerRegistry: 'shoppingacr123'
-        tags: |
-          $(Build.BuildId)
-        arguments: --platform linux/amd64
+    - script: |
+          docker buildx create --use
 
+          docker buildx build \
+          --platform linux/amd64 \
+          -t shoppingacr123.azurecr.io/taskmanager-app:$(Build.BuildId) \
+          -t shoppingacr123.azurecr.io/taskmanager-app:latest \
+          --push .
+    displayName: Build and Push (AMD64 ONLY)
 
 - stage: Deploy
   dependsOn: Build
