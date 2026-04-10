@@ -43,3 +43,17 @@ app.listen(port, () => {
 } catch (err) {
   console.error("Startup error:", err);
 }
+
+// 👇 ADD THIS
+app.get("/", (req, res) => {
+  res.send("Task Manager API is running 🚀");
+});
+
+// example route (if you have tasks)
+app.get("/tasks", (req, res) => {
+  res.json([{ id: 1, name: "Test task" }]);
+});
+
+app.listen(port, () => {
+  console.log("Server running on port " + port);
+});
