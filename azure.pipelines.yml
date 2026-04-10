@@ -23,8 +23,8 @@ stages:
         dockerfile: '**/Dockerfile'
         containerRegistry: 'shoppingacr123'
         tags: |
-          $(tag)
-          latest
+          $(Build.BuildId)
+        arguments: --platform linux/amd64
 
 
 - stage: Deploy
