@@ -35,8 +35,9 @@ stages:
       name: 'Default'   # 👈 SAME HERE (optional but common)
     steps:
 
-    - task: AzureWebAppContainer@1
+    - task: AzureContainerApps@1
       inputs:
         azureSubscription: 'Azure subscription 1(05d41934-234a-4887-a212-e032ae353899)'
-        appName: 'taskmanager-app'
-        containers: '$(containerRegistry)/$(imageName):$(tag)'
+        ContainerAppName: 'taskmanager-app'
+        resourceGroup: 'taskmanager-rg'
+        imageToDeploy: 'shoppingacr123.azurecr.io/taskmanager-app:$(Build.BuildId)'
