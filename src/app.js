@@ -1,46 +1,77 @@
-console.log("App starting...");
-
 const express = require('express');
 const app = express();
 
 app.use(express.json());
 
-let tasks = [];
+// In-memory "database"
+let jerseys = [
+    { id: 1, name: "Real Madrid Home Kit", price: 90 },
+    { id: 2, name: "Barcelona Away Kit", price: 85 },
+    { id: 3, name: "Manchester United Home Kit", price: 95 }
+];
 
-// Health check (IMPORTANT for Azure debugging)
+// -------------------- FRONTEND --------------------
+
+// Main page (homepage)
 app.get("/", (req, res) => {
-    res.send("Task Manager API is running 🚀");
+    let html = `
+        <h1>⚽ Soccer Jersey Store</h1>
+        <p>Welcome to our microservice-powered jersey shop!</p>
+        <h2>Available Jerseys:</h2>
+        <ul>
+            ${jerseys.map(j => `<li>${j.name} - $${j.price}</li>`).join("")}
+        </ul>
+        <p>API Endpoint: <a href="/jerseys">/jerseys</a></p>
+    `;
+    res.send(html);
 });
 
-// Create Task
-app.post('/tasks', (req, res) => {
-    const task = { id: Date.now(), name: req.body.name };
-    tasks.push(task);
-    res.status(201).send(task);
+// -------------------- API --------------------
+
+// Get all jerseys
+app.get('/jerseys', (req, res) => {
+    res.json(jerseys);
 });
 
-// Get Tasks
-app.get('/tasks', (req, res) => {
-    res.send(tasks);
+// Get one jersey
+app.get('/jerseys/:id', (req, res) => {
+    const jersey = jerseys.find(j => j.id == req.params.id);
+    if (!jersey) return res.status(404).send("Jersey not found");
+    res.json(jersey);
 });
 
-// Update Task
-app.put('/tasks/:id', (req, res) => {
-    const task = tasks.find(t => t.id == req.params.id);
-    if (!task) return res.status(404).send("Not found");
-
-    task.name = req.body.name;
-    res.send(task);
+// Add jersey
+app.post('/jerseys', (req, res) => {
+    const newJersey = {
+        id: Date.now(),
+        name: req.body.name,
+        price: req.body.price
+    };
+    jerseys.push(newJersey);
+    res.status(201).json(newJersey);
 });
 
-// Delete Task
-app.delete('/tasks/:id', (req, res) => {
-    tasks = tasks.filter(t => t.id != req.params.id);
+// Update jersey
+app.put('/jerseys/:id', (req, res) => {
+    const jersey = jerseys.find(j => j.id == req.params.id);
+    if (!jersey) return res.status(404).send("Not found");
+
+    jersey.name = req.body.name;
+    jersey.price = req.body.price;
+
+    res.json(jersey);
+});
+
+// Delete jersey
+app.delete('/jerseys/:id', (req, res) => {
+    jerseys = jerseys.filter(j => j.id != req.params.id);
     res.send("Deleted");
 });
+
+// -------------------- SERVER --------------------
 
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-    console.log("Server running on port " + port);
+    console.log("⚽ Jersey Store running on port " + port);
 });
