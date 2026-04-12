@@ -39,3 +39,17 @@ body {
   color: green;
   font-weight: bold;
 }
+
+.cart-item {
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease;
+}
+
+.cart-item:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+}
