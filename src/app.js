@@ -14,15 +14,25 @@ app.use(express.json());
 let cart = [];
 
 let jerseys = [
-    { id: 1, name: "Real Madrid Home Kit", price: 90, img: "https://via.placeholder.com/200" },
-    { id: 2, name: "Barcelona Away Kit", price: 85 },
+    {
+    id: 1,
+    name: "Real Madrid Home Kit",
+    price: 90,
+    img: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb"
+  },
+    {
+    id: 2,
+    name: "Barcelona Away Kit",
+    price: 85,
+    img: "https://images.unsplash.com/photo-1599058917212-d750089bc07e"
+  },
     { id: 3, name: "Manchester United Home Kit", price: 95 }
 ];
 
 // -------------------- FRONTEND --------------------
 
 app.get("/", (req, res) => {
-    res.render("index", { jerseys });
+    res.render("index", { jerseys, cart, query: req.query });
 });
 
 // -------------------- API --------------------
@@ -32,7 +42,15 @@ app.get('/jerseys', (req, res) => {
 });
 
 app.get('/store', (req, res) => {
-    res.render('jerseys', { jerseys });
+    let filtered = jerseys;
+
+    if (req.query.search) {
+        filtered = jerseys.filter(j =>
+            j.name.toLowerCase().includes(req.query.search.toLowerCase())
+        );
+    }
+
+    res.render('jerseys', { jerseys: filtered });
 });
 
 // -------------------- CART --------------------
@@ -41,8 +59,20 @@ app.post('/cart/:id', (req, res) => {
     const jersey = jerseys.find(j => j.id == req.params.id);
     if (!jersey) return res.status(404).send("Not found");
 
-    cart.push(jersey);
-    res.redirect('/');
+   const item = cart.find(i => i.id == jersey.id);
+
+if (item) {
+    item.qty = (item.qty || 1) + 1;
+} else {
+    const item = cart.find(i => i.id == jersey.id);
+
+if (item) {
+    item.qty = (item.qty || 1) + 1;
+} else {
+    cart.push({ ...jersey, qty: 1 });
+}
+}
+    res.redirect('/?added=true');
 });
 
 app.get('/cart', (req, res) => {
