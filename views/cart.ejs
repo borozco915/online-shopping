@@ -31,6 +31,10 @@
             </div>
         <% }) %>
     </div>
+    <h3 class="mt-4">
+  Total: $
+  <%= cart.reduce((sum, item) => sum + item.price, 0) %>
+</h3>
 
     <a href="/" class="btn btn-secondary mt-3">Back to Store</a>
 
