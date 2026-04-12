@@ -1,46 +1,91 @@
-console.log("App starting...");
-
+app.set('view engine', 'ejs');
 const express = require('express');
 const app = express();
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 
-let tasks = [];
+// In-memory "database"
+let cart = [];
+let jerseys = [
+    { id: 1, name: "Real Madrid Home Kit", price: 90, img: "https://via.placeholder.com/200" },
+    { id: 2, name: "Barcelona Away Kit", price: 85 },
+    { id: 3, name: "Manchester United Home Kit", price: 95 }
+];
 
-// Health check (IMPORTANT for Azure debugging)
+// -------------------- FRONTEND --------------------
+
+// Main page (homepage)
 app.get("/", (req, res) => {
-    res.send("Task Manager API is running 🚀");
+    res.render("index", { jerseys });
+});
+// -------------------- API --------------------
+
+// Get all jerseys
+app.get('/jerseys', (req, res) => {
+    res.json(jerseys);
 });
 
-// Create Task
-app.post('/tasks', (req, res) => {
-    const task = { id: Date.now(), name: req.body.name };
-    tasks.push(task);
-    res.status(201).send(task);
+// Get one jersey
+app.get('/jerseys/:id', (req, res) => {
+    const jersey = jerseys.find(j => j.id == req.params.id);
+    if (!jersey) return res.status(404).send("Jersey not found");
+    res.json(jersey);
 });
 
-// Get Tasks
-app.get('/tasks', (req, res) => {
-    res.send(tasks);
+// Add jersey
+app.post('/jerseys', (req, res) => {
+    const newJersey = {
+        id: Date.now(),
+        name: req.body.name,
+        price: req.body.price
+    };
+    jerseys.push(newJersey);
+    res.status(201).json(newJersey);
 });
 
-// Update Task
-app.put('/tasks/:id', (req, res) => {
-    const task = tasks.find(t => t.id == req.params.id);
-    if (!task) return res.status(404).send("Not found");
+// Update jersey
+app.put('/jerseys/:id', (req, res) => {
+    const jersey = jerseys.find(j => j.id == req.params.id);
+    if (!jersey) return res.status(404).send("Not found");
 
-    task.name = req.body.name;
-    res.send(task);
+    jersey.name = req.body.name;
+    jersey.price = req.body.price;
+
+    res.json(jersey);
 });
 
-// Delete Task
-app.delete('/tasks/:id', (req, res) => {
-    tasks = tasks.filter(t => t.id != req.params.id);
+// Delete jersey
+app.delete('/jerseys/:id', (req, res) => {
+    jerseys = jerseys.filter(j => j.id != req.params.id);
     res.send("Deleted");
 });
+//Cart Route
+app.post('/cart/:id', (req, res) => {
+    const jersey = jerseys.find(j => j.id == req.params.id);
+    if (!jersey) return res.status(404).send("Not found");
+
+    cart.push(jersey);
+
+    res.redirect('/');
+});
+
+//View Cart Page
+app.get('/cart', (req, res) => {
+    res.render('cart', { cart });
+});
+
+//Remove From Cart
+app.post('/cart/remove/:id', (req, res) => {
+    cart = cart.filter(item => item.id != req.params.id);
+    res.redirect('/cart');
+});
+
+// -------------------- SERVER --------------------
 
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-    console.log("Server running on port " + port);
+    console.log("⚽ Jersey Store running on port " + port);
 });
