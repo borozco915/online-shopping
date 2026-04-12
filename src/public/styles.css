@@ -53,3 +53,16 @@ body {
   border: none;
   border-radius: 15px;
 }
+
+.card {
+  border-radius: 15px;
+  border: none;
+}
+
+.btn-success {
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+}

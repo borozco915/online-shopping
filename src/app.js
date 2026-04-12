@@ -84,6 +84,27 @@ app.post('/cart/remove/:id', (req, res) => {
     res.redirect('/cart');
 });
 
+// Checkout page
+app.get('/checkout', (req, res) => {
+    res.render('checkout', { cart });
+});
+
+// Place order
+app.post('/checkout', (req, res) => {
+    const order = {
+        id: Date.now(),
+        items: cart,
+        total: cart.reduce((sum, item) => sum + item.price, 0),
+        customer: req.body
+    };
+
+    console.log("New Order:", order);
+
+    cart = []; // 🧹 clear cart after checkout
+
+    res.render('confirmation', { order });
+});
+
 // -------------------- SERVER --------------------
 
 const port = process.env.PORT || 8080;
