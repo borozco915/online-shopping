@@ -31,6 +31,10 @@ app.get('/jerseys', (req, res) => {
     res.json(jerseys);
 });
 
+app.get('/store', (req, res) => {
+    res.render('jerseys', { jerseys });
+});
+
 // -------------------- CART --------------------
 
 app.post('/cart/:id', (req, res) => {
