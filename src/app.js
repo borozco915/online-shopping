@@ -7,6 +7,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 // In-memory "database"
+let cart = [];
 let jerseys = [
     { id: 1, name: "Real Madrid Home Kit", price: 90, img: "https://via.placeholder.com/200" },
     { id: 2, name: "Barcelona Away Kit", price: 85 },
@@ -59,6 +60,26 @@ app.put('/jerseys/:id', (req, res) => {
 app.delete('/jerseys/:id', (req, res) => {
     jerseys = jerseys.filter(j => j.id != req.params.id);
     res.send("Deleted");
+});
+//Cart Route
+app.post('/cart/:id', (req, res) => {
+    const jersey = jerseys.find(j => j.id == req.params.id);
+    if (!jersey) return res.status(404).send("Not found");
+
+    cart.push(jersey);
+
+    res.redirect('/');
+});
+
+//View Cart Page
+app.get('/cart', (req, res) => {
+    res.render('cart', { cart });
+});
+
+//Remove From Cart
+app.post('/cart/remove/:id', (req, res) => {
+    cart = cart.filter(item => item.id != req.params.id);
+    res.redirect('/cart');
 });
 
 // -------------------- SERVER --------------------

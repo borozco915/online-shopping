@@ -15,6 +15,7 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container">
         <span class="navbar-brand">⚽ Jersey Store</span>
+        <a href="/cart" class="btn btn-warning">🛒 Cart (<%= jerseys.length %>)</a>
     </div>
 </nav>
 
@@ -35,7 +36,9 @@
                     <div class="card-body text-center">
                         <h5><%= j.name %></h5>
                         <p class="price">$<%= j.price %></p>
-                        <button class="btn btn-primary">Buy</button>
+                    <form action="/cart/<%= j.id %>" method="POST">
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </form>
                     </div>
 
                 </div>
