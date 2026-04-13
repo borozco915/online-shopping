@@ -14,62 +14,63 @@ app.use(express.json());
 let cart = [];
 
 const jerseys = [
-  {
+  
+    {
     id: 1,
     name: "Real Madrid Home Kit",
     price: 90,
-    img: "https://assets.adidas.com/images/w_600,f_auto,q_auto/real-madrid-24-home-jersey-white.jpg"
-  },
-  {
+    img: "/images/jerseys/madrid.jpg"
+    },
+    {
     id: 2,
     name: "Barcelona Away Kit",
     price: 85,
-    img: "https://store.fcbarcelona.com/medias/barcelona-away-jersey-24.jpg"
-  },
-  {
+    img: "/images/jerseys/barcelona.jpg"
+    },
+    {
     id: 3,
     name: "Manchester United Home Kit",
     price: 95,
-    img: "https://assets.adidas.com/images/w_600,f_auto,q_auto/manchester-united-home-jersey-red.jpg"
-  },
+    img: "/images/jerseys/united.jpg"
+    },
 
-  // NEW OPTIONS 👇
-  {
+    {
     id: 4,
     name: "Liverpool Home Kit",
     price: 90,
-    img: "https://images.liverpoolfc.com/liverpool-home-kit-2024.jpg"
-  },
+    img: "/images/jerseys/liverpool.jpg"
+    },
   {
     id: 5,
     name: "Chelsea Home Kit",
     price: 88,
-    img: "https://images.chelseafc.com/chelsea-home-kit-2024.jpg"
-  },
+    img: "/images/jerseys/chelsea.jpg"
+    },
+
   {
-    id: 6,
-    name: "Paris Saint-Germain Home Kit",
-    price: 92,
-    img: "https://store.psg.fr/images/psg-home-jersey-2024.jpg"
-  },
+  id: 6,
+  name: "Paris Saint-Germain Home Kit",
+  price: 92,
+  img: "/images/jerseys/psg.jpg"
+    },
   {
-    id: 7,
-    name: "Bayern Munich Home Kit",
-    price: 93,
-    img: "https://assets.adidas.com/images/w_600,f_auto,q_auto/bayern-munich-home-jersey-red.jpg"
-  },
+  id: 7,
+  name: "Bayern Munich Home Kit",
+  price: 93,
+  img: "/images/jerseys/bayern.jpg"
+    },
   {
-    id: 8,
-    name: "Juventus Home Kit",
-    price: 89,
-    img: "https://store.juventus.com/images/juventus-home-kit-2024.jpg"
-  },
+  id: 8,
+  name: "Juventus Home Kit",
+  price: 89,
+  img: "/images/jerseys/juventus.jpg"
+    },
   {
-    id: 9,
-    name: "Arsenal Home Kit",
-    price: 91,
-    img: "https://assets.adidas.com/images/w_600,f_auto,q_auto/arsenal-home-jersey-red.jpg"
-  }
+  id: 9,
+  name: "Arsenal Home Kit",
+  price: 91,
+  img: "/images/jerseys/arsenal.jpg"
+    }
 ];
 
 // -------------------- FRONTEND --------------------
