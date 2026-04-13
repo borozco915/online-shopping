@@ -40,12 +40,14 @@
                         <!-- DETAILS -->
                         <div class="col-md-5">
                             <h5><%= item.name %></h5>
-                            <p class="text-muted">Premium Jersey</p>
+                            <p class="text-muted mb-1">Premium Jersey</p>
+                            <p class="small text-secondary mb-0">Size: <strong><%= item.size || 'Standard' %></strong></p>
                         </div>
 
                         <!-- PRICE -->
                         <div class="col-md-2 text-center">
-                            <p class="fw-bold">$<%= item.price %></p>
+                            <p class="fw-bold mb-1">$<%= item.price %></p>
+                            <p class="small text-muted mb-0">Qty: <%= item.qty || 1 %></p>
                         </div>
 
                         <!-- REMOVE -->
@@ -78,7 +80,7 @@
                 <p>
                     Total:
                     <strong>
-                        $<%= cart.reduce((sum, item) => sum + item.price, 0) %>
+                        $<%= cart.reduce((sum, item) => sum + (item.price * (item.qty || 1)), 0) %>
                     </strong>
                 </p>
 
