@@ -66,3 +66,10 @@ body {
 body {
   font-family: 'Segoe UI', sans-serif;
 }
+
+#card-preview {
+  border-radius: 15px;
+  background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+  font-family: monospace;
+  letter-spacing: 2px;
+}

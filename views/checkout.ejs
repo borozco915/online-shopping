@@ -11,6 +11,35 @@
 
     <link rel="stylesheet" href="/styles.css">
 </head>
+<script>
+const cardNumber = document.querySelector('input[name="cardNumber"]');
+const cardName = document.querySelector('input[name="name"]');
+const cardExp = document.querySelector('input[name="exp"]');
+
+cardNumber.addEventListener('input', () => {
+    document.getElementById('card-number-preview').innerText =
+        cardNumber.value || '•••• •••• •••• ••••';
+});
+
+cardName.addEventListener('input', () => {
+    document.getElementById('card-name-preview').innerText =
+        cardName.value || 'Your Name';
+});
+
+cardExp.addEventListener('input', () => {
+    document.getElementById('card-exp-preview').innerText =
+        cardExp.value || 'MM/YY';
+});
+
+document.querySelector("form").addEventListener("submit", (e) => {
+    const number = cardNumber.value.replace(/\s/g, "");
+
+    if (number.length < 16) {
+        alert("Invalid card number");
+        e.preventDefault();
+    }
+});
+</script>
 
 <body class="bg-light">
 
@@ -42,7 +71,35 @@
                         <label class="form-label">Shipping Address</label>
                         <input name="address" class="form-control" placeholder="123 Main St" required>
                     </div>
+                    <h5 class="mt-4 mb-3">
+    <i class="bi bi-credit-card"></i> Payment Details
+</h5>
 
+<div class="card p-3 bg-dark text-white mb-3" id="card-preview">
+    <div class="mb-2">💳 Credit Card</div>
+    <h5 id="card-number-preview">•••• •••• •••• ••••</h5>
+    <div class="d-flex justify-content-between">
+        <small id="card-name-preview">Your Name</small>
+        <small id="card-exp-preview">MM/YY</small>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label>Card Number</label>
+    <input name="cardNumber" class="form-control" maxlength="19" placeholder="1234 5678 9012 3456" required>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <label>Expiration</label>
+        <input name="exp" class="form-control" placeholder="MM/YY" required>
+    </div>
+
+    <div class="col-md-6">
+        <label>CVV</label>
+        <input name="cvv" class="form-control" maxlength="4" placeholder="123" required>
+    </div>
+</div>
                     <button class="btn btn-success w-100 mt-3">
                         <i class="bi bi-bag-check"></i> Place Order
                     </button>
