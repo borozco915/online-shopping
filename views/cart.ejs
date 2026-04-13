@@ -8,6 +8,25 @@
 </head>
 
 <body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+
+        <!-- Brand -->
+        <a href="/" class="navbar-brand">⚽ Jersey Store</a>
+
+        <!-- Nav Buttons -->
+        <div class="d-flex gap-2">
+            <a href="/" class="btn btn-outline-light">Home</a>
+            <a href="/store" class="btn btn-outline-light">Shop</a>
+            <a href="/orders" class="btn btn-outline-light">📦 Orders</a>
+
+            <a href="/cart" class="btn btn-warning">
+                🛒 Cart (<%= cart.length %>)
+            </a>
+        </div>
+
+    </div>
+</nav>
 
 <div class="container mt-5">
 
@@ -98,4 +117,6 @@
 </div>
 
 </body>
+
+
 </html>
