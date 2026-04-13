@@ -47,9 +47,12 @@
                         <h5><%= j.name %></h5>
                         <p class="price">$<%= j.price %></p>
 
-                        <form action="/cart/<%= j.id %>" method="POST">
-                            <button class="btn btn-success">Add to Cart</button>
-                        </form>
+                        <div class="d-grid gap-2">
+                            <a href="/product/<%= j.id %>" class="btn btn-outline-dark">View Details</a>
+                            <form action="/cart/<%= j.id %>" method="POST">
+                                <button class="btn btn-success w-100">Add to Cart</button>
+                            </form>
+                        </div>
 
                         <div class="product-secondary-actions">
                             <form action="/wishlist/<%= j.id %>" method="POST">

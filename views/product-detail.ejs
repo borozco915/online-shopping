@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= jersey.name %></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body class="bg-light">
+
+<%- include('partials/navbar') %>
+
+<div class="container mt-5 mb-5">
+    <nav class="detail-breadcrumb mb-4">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/store">Shop</a>
+        <span>/</span>
+        <span><%= jersey.name %></span>
+    </nav>
+
+    <div class="card product-detail-hero shadow-sm">
+        <div class="row g-0">
+            <div class="col-lg-6 product-detail-hero__visual">
+                <span class="product-detail-badge"><%= jersey.badge %></span>
+                <img src="<%= jersey.img %>" alt="<%= jersey.name %>" class="product-detail-image">
+            </div>
+
+            <div class="col-lg-6">
+                <div class="product-detail-hero__content">
+                    <p class="product-detail-kicker mb-2">Official Club Jersey</p>
+                    <h1 class="mb-3"><%= jersey.name %></h1>
+                    <div class="product-detail-rating mb-3">
+                        <span><%= '★'.repeat(Math.round(averageRating)) %><%= '☆'.repeat(5 - Math.round(averageRating)) %></span>
+                        <span class="text-muted"><%= averageRating.toFixed(1) %> from <%= jersey.reviews.length %> reviews</span>
+                    </div>
+                    <p class="product-detail-price">$<%= jersey.price %></p>
+                    <p class="product-detail-copy"><%= jersey.description %></p>
+
+                    <div class="product-detail-meta">
+                        <div class="product-detail-meta__item">
+                            <h3>Fit</h3>
+                            <p><%= jersey.fit %></p>
+                        </div>
+                        <div class="product-detail-meta__item">
+                            <h3>Material</h3>
+                            <p><%= jersey.material %></p>
+                        </div>
+                        <div class="product-detail-meta__item">
+                            <h3>Shipping</h3>
+                            <p><%= jersey.shipping %></p>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="/store" class="btn btn-outline-dark">Back to Shop</a>
+                        <form action="/wishlist/<%= jersey.id %>" method="POST">
+                            <button class="btn btn-outline-danger w-100">Add to Wishlist</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 g-4">
+        <div class="col-lg-7">
+            <div class="card product-section-card shadow-sm">
+                <div class="product-section-card__header">
+                    <h2>Size Guide</h2>
+                    <p>Use this quick reference to choose the best fit.</p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Size</th>
+                                <th>Chest</th>
+                                <th>Length</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% jersey.sizeGuide.forEach(option => { %>
+                                <tr>
+                                    <td><strong><%= option.size %></strong></td>
+                                    <td><%= option.chest %></td>
+                                    <td><%= option.length %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card product-section-card shadow-sm mt-4">
+                <div class="product-section-card__header">
+                    <h2>Customer Reviews</h2>
+                    <p>What supporters are saying about this jersey.</p>
+                </div>
+
+                <div class="product-review-list">
+                    <% jersey.reviews.forEach(review => { %>
+                        <div class="product-review">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <strong><%= review.author %></strong>
+                                <span class="product-review__stars"><%= '★'.repeat(review.rating) %><%= '☆'.repeat(5 - review.rating) %></span>
+                            </div>
+                            <p class="mb-0 text-muted"><%= review.comment %></p>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card product-section-card shadow-sm">
+                <div class="product-section-card__header">
+                    <h2>Available Sizes</h2>
+                    <p>Choose your match-day fit.</p>
+                </div>
+
+                <div class="size-options">
+                    <% jersey.sizes.forEach(size => { %>
+                        <span class="size-option is-selected"><%= size %></span>
+                    <% }) %>
+                </div>
+
+                <form action="/cart/<%= jersey.id %>" method="POST" class="mt-2">
+                    <label class="form-label">Select size before adding to cart</label>
+                    <select name="size" class="form-select mb-3">
+                        <% jersey.sizes.forEach(size => { %>
+                            <option value="<%= size %>"><%= size %></option>
+                        <% }) %>
+                    </select>
+                    <button class="btn btn-primary w-100">Add to Cart</button>
+                </form>
+            </div>
+
+            <div class="card product-section-card shadow-sm mt-4">
+                <div class="product-section-card__header">
+                    <h2>Related Jerseys</h2>
+                    <p>More clubs you may want to explore next.</p>
+                </div>
+
+                <div class="related-product-list">
+                    <% relatedJerseys.forEach(item => { %>
+                        <a href="/product/<%= item.id %>" class="related-product">
+                            <img src="<%= item.img %>" alt="<%= item.name %>">
+                            <div>
+                                <strong><%= item.name %></strong>
+                                <p class="mb-0 text-muted">$<%= item.price %></p>
+                            </div>
+                        </a>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
