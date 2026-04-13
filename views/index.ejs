@@ -17,16 +17,7 @@
 </script>
 <body class="bg-light">
 
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container">
-        <span class="navbar-brand">⚽ Jersey Store</span>
-        <a href="/cart" class="btn btn-warning">
-            🛒 Cart (<%= typeof cart !== 'undefined' ? cart.length : 0 %>)
-        </a>
-        <a href="/store" class="btn btn-primary">View Jerseys</a>
-        <a href="/orders" class="btn btn-outline-light">📦 Orders</a>
-    </div>
-</nav>
+<%- include('partials/navbar') %>
 
 <div class="container mt-5">
     <!-- ✅ ADD THIS BLOCK RIGHT HERE -->
