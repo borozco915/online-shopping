@@ -14,6 +14,16 @@
 <div class="container mt-5">
 
     <h2 class="text-center mb-4">Available Jerseys</h2>
+    <% if (search) { %>
+        <p class="text-center text-muted mb-4">Showing results for "<%= search %>"</p>
+    <% } %>
+
+    <% if (jerseys.length === 0) { %>
+        <div class="card shadow-sm p-4 text-center empty-state-card">
+            <h4 class="mb-2">No jerseys matched your search.</h4>
+            <p class="text-muted mb-0">Try another club, city, or team name from the navbar search.</p>
+        </div>
+    <% } %>
 
     <div class="row">
         <% jerseys.forEach(j => { %>
@@ -40,6 +50,15 @@
                         <form action="/cart/<%= j.id %>" method="POST">
                             <button class="btn btn-success">Add to Cart</button>
                         </form>
+
+                        <div class="product-secondary-actions">
+                            <form action="/wishlist/<%= j.id %>" method="POST">
+                                <button class="btn btn-outline-danger btn-sm w-100">Add to Wishlist</button>
+                            </form>
+                            <form action="/saved/<%= j.id %>" method="POST">
+                                <button class="btn btn-outline-secondary btn-sm w-100">Save for Later</button>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
