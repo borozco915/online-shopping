@@ -139,6 +139,29 @@ app.get('/orders', (req, res) => {
     res.render('orders', { orders });
 });
 
+//Admin Portal
+app.get('/admin', (req, res) => {
+
+    const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+
+    res.render('admin', {
+        orders,
+        totalRevenue,
+        totalOrders: orders.length,
+        totalProducts: jerseys.length
+    });
+});
+
+app.get('/admin/orders/:id', (req, res) => {
+    const order = orders.find(o => o.id == req.params.id);
+    res.render('order-details', { order });
+});
+
+app.post('/admin/orders/delete/:id', (req, res) => {
+    orders = orders.filter(o => o.id != req.params.id);
+    res.redirect('/admin');
+});
+
 // Place order
 app.post('/checkout', (req, res) => {
     const order = {
@@ -161,6 +184,8 @@ res.render('confirmation', { order });
 
     res.render('confirmation', { order });
 });
+
+
 
 // -------------------- SERVER --------------------
 
