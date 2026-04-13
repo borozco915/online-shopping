@@ -99,22 +99,16 @@ let orders = [];
 
 app.post('/cart/:id', (req, res) => {
     const jersey = jerseys.find(j => j.id == req.params.id);
-    if (!jersey) return res.status(404).send("Not found");
 
-   const item = cart.find(i => i.id == jersey.id);
-
-if (item) {
-    item.qty = (item.qty || 1) + 1;
-} else {
     const item = cart.find(i => i.id == jersey.id);
 
-if (item) {
-    item.qty = (item.qty || 1) + 1;
-} else {
-    cart.push({ ...jersey, qty: 1 });
-}
-}
-    res.redirect('/?added=true');
+    if (item) {
+        item.qty = (item.qty || 1) + 1;
+    } else {
+        cart.push({ ...jersey, qty: 1 });
+    }
+
+    res.redirect('/');
 });
 
 app.get('/cart', (req, res) => {
@@ -162,26 +156,20 @@ app.post('/admin/orders/delete/:id', (req, res) => {
 // Place order
 app.post('/checkout', (req, res) => {
     const order = {
-    id: Date.now(),
-    items: [...cart], // 👈 clone cart
-    total: cart.reduce((sum, item) => sum + item.price, 0),
-    customer: req.body,
-    date: new Date()
-};
+        id: Date.now(),
+        items: [...cart],
+        total: cart.reduce((sum, item) => sum + item.price, 0),
+        customer: req.body,
+        date: new Date()
+    };
 
-orders.push(order); // 👈 SAVE ORDER
-
-cart = [];
-
-res.render('confirmation', { order });
+    orders.push(order);
+    cart = [];
 
     console.log("New Order:", order);
 
-    cart = []; // 🧹 clear cart after checkout
-
     res.render('confirmation', { order });
 });
-
 
 
 // -------------------- SERVER --------------------
@@ -189,5 +177,5 @@ res.render('confirmation', { order });
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-    console.log("⚽ Jersey Store running on port " + port);
+    console.log(`⚽ Jersey Store running on port ${port}`);
 });
