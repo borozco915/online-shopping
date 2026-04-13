@@ -19,57 +19,54 @@ const jerseys = [
     id: 1,
     name: "Real Madrid Home Kit",
     price: 90,
-    img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=60"
+    img: "/images/jerseys/madrid.png"
   },
   {
     id: 2,
     name: "Barcelona Away Kit",
     price: 85,
-    img: "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=600&q=60"
+    img: "/images/jerseys/barcelona.png"
   },
   {
     id: 3,
     name: "Manchester United Home Kit",
     price: 95,
-    img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=60"
-  },
+    img: "/images/jerseys/united.png"  },
   {
     id: 4,
     name: "Liverpool Home Kit",
     price: 90,
-    img: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=60"
+    img: "/images/jerseys/liverpool.png"
   },
   {
     id: 5,
     name: "Chelsea Home Kit",
     price: 88,
-    img: "https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=600&q=60"
+    img: "/images/jerseys/chelsea.png"
   },
 
   {
   id: 6,
   name: "Paris Saint-Germain Home Kit",
   price: 92,
-  img: "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?auto=format&fit=crop&w=600&q=60"
-},
+  img: "/images/jerseys/psg.png"},
 {
   id: 7,
   name: "Bayern Munich Home Kit",
   price: 93,
-  img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=60"
+  img: "/images/jerseys/bayern.png"
 },
 {
   id: 8,
   name: "Juventus Home Kit",
   price: 89,
-  img: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=600&q=60"
+  img: "/images/jerseys/juventus.png"
 },
 {
   id: 9,
   name: "Arsenal Home Kit",
   price: 91,
-  img: "https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=600&q=60"
-}
+  img: "/images/jerseys/arsenal.png"}
 ];
 
 // -------------------- FRONTEND --------------------
