@@ -12,6 +12,7 @@
   const description = document.getElementById('product-modal-description');
   const image = document.getElementById('product-modal-image');
   const form = document.getElementById('product-modal-form');
+  const detailLink = document.getElementById('product-modal-link');
   const sizes = document.getElementById('product-modal-sizes');
   const selectedSizeInput = document.getElementById('product-modal-selected-size');
   const selectedSizeLabel = document.getElementById('selected-size-label');
@@ -84,6 +85,7 @@
     image.src = dataset.img;
     image.alt = dataset.name;
     form.action = '/cart/' + dataset.id;
+    detailLink.href = '/product/' + dataset.id;
 
     resetSizeSelection((dataset.sizes || '').split(',').filter(Boolean));
     setSpin(0);

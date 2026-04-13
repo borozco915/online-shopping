@@ -34,7 +34,21 @@ const jerseys = [
     price: 90,
     img: "/images/jerseys/madrid.png",
     sizes: ["S", "M", "L", "XL"],
-    description: "Classic white home jersey with breathable match-day fabric."
+    description: "Classic white home jersey with breathable match-day fabric.",
+    badge: "Best Seller",
+    fit: "Regular fit with lightweight stretch through the shoulders.",
+    material: "100% recycled polyester with moisture-wicking finish.",
+    shipping: "Ships in 1-2 business days with free delivery over $120.",
+    sizeGuide: [
+      { size: "S", chest: "34-36 in", length: "27 in" },
+      { size: "M", chest: "38-40 in", length: "28 in" },
+      { size: "L", chest: "42-44 in", length: "29 in" },
+      { size: "XL", chest: "46-48 in", length: "30 in" }
+    ],
+    reviews: [
+      { author: "Marco", rating: 5, comment: "The fabric feels premium and the crest details really stand out." },
+      { author: "Daniel", rating: 4, comment: "Comfortable for match days and fits true to size." }
+    ]
   },
   {
     id: 2,
@@ -42,7 +56,21 @@ const jerseys = [
     price: 85,
     img: "/images/jerseys/barcelona.png",
     sizes: ["S", "M", "L", "XL"],
-    description: "Bold away colors with a lightweight athletic fit."
+    description: "Bold away colors with a lightweight athletic fit.",
+    badge: "New Arrival",
+    fit: "Athletic cut designed to sit close without feeling tight.",
+    material: "Performance mesh blend for all-day comfort.",
+    shipping: "Ships next business day with tracked standard delivery.",
+    sizeGuide: [
+      { size: "S", chest: "35-37 in", length: "27 in" },
+      { size: "M", chest: "38-40 in", length: "28 in" },
+      { size: "L", chest: "41-43 in", length: "29 in" },
+      { size: "XL", chest: "44-46 in", length: "30 in" }
+    ],
+    reviews: [
+      { author: "Luis", rating: 5, comment: "The away colorway looks even better in person." },
+      { author: "Nina", rating: 4, comment: "Lightweight and breathable, perfect for summer wear." }
+    ]
   },
   {
     id: 3,
@@ -50,7 +78,21 @@ const jerseys = [
     price: 95,
     img: "/images/jerseys/united.png",
     sizes: ["M", "L", "XL", "XXL"],
-    description: "Signature red home shirt built for stadium energy."
+    description: "Signature red home shirt built for stadium energy.",
+    badge: "Fan Favorite",
+    fit: "Relaxed supporter fit with extra room in the body.",
+    material: "Soft-touch knit with ventilated side panels.",
+    shipping: "Ships in 1-2 business days and includes easy returns.",
+    sizeGuide: [
+      { size: "M", chest: "39-41 in", length: "28 in" },
+      { size: "L", chest: "42-44 in", length: "29 in" },
+      { size: "XL", chest: "45-47 in", length: "30 in" },
+      { size: "XXL", chest: "48-50 in", length: "31 in" }
+    ],
+    reviews: [
+      { author: "Chris", rating: 5, comment: "Looks sharp and the fit is spot on for layering." },
+      { author: "Avery", rating: 4, comment: "Great quality, just a slightly roomier cut than I expected." }
+    ]
   },
   {
     id: 4,
@@ -58,7 +100,21 @@ const jerseys = [
     price: 90,
     img: "/images/jerseys/liverpool.png",
     sizes: ["S", "M", "L", "XL"],
-    description: "Streamlined home strip with soft-touch performance fabric."
+    description: "Streamlined home strip with soft-touch performance fabric.",
+    badge: "Match Day Pick",
+    fit: "Modern straight fit with a clean drape through the torso.",
+    material: "Featherweight performance weave with soft interior feel.",
+    shipping: "Ships in 2 business days; expedited delivery available.",
+    sizeGuide: [
+      { size: "S", chest: "35-37 in", length: "27 in" },
+      { size: "M", chest: "38-40 in", length: "28 in" },
+      { size: "L", chest: "41-43 in", length: "29 in" },
+      { size: "XL", chest: "44-46 in", length: "30 in" }
+    ],
+    reviews: [
+      { author: "Ethan", rating: 5, comment: "The stitching and color are excellent." },
+      { author: "Maya", rating: 4, comment: "Comfortable enough to wear all day, not just to games." }
+    ]
   },
   {
     id: 5,
@@ -66,7 +122,21 @@ const jerseys = [
     price: 88,
     img: "/images/jerseys/chelsea.png",
     sizes: ["S", "M", "L", "XL"],
-    description: "Modern royal blue jersey with a relaxed supporter fit."
+    description: "Modern royal blue jersey with a relaxed supporter fit.",
+    badge: "Club Classic",
+    fit: "Supporter fit with soft structure and easy movement.",
+    material: "Quick-dry fabric with breathable shoulder panels.",
+    shipping: "Ships in 1-3 business days with live order tracking.",
+    sizeGuide: [
+      { size: "S", chest: "34-36 in", length: "27 in" },
+      { size: "M", chest: "37-39 in", length: "28 in" },
+      { size: "L", chest: "40-42 in", length: "29 in" },
+      { size: "XL", chest: "43-45 in", length: "30 in" }
+    ],
+    reviews: [
+      { author: "James", rating: 4, comment: "Solid fit and the blue has a great finish." },
+      { author: "Tori", rating: 5, comment: "One of my favorite kits this season." }
+    ]
   },
 
   {
@@ -75,7 +145,20 @@ const jerseys = [
     price: 92,
     img: "/images/jerseys/psg.png",
     sizes: ["M", "L", "XL"],
-    description: "Paris-inspired home jersey with a sleek modern silhouette."
+    description: "Paris-inspired home jersey with a sleek modern silhouette.",
+    badge: "Premium Pick",
+    fit: "Tailored fit with a clean silhouette and flexible sleeves.",
+    material: "Smooth knit shell with breathable side mesh.",
+    shipping: "Ships next business day with priority delivery available.",
+    sizeGuide: [
+      { size: "M", chest: "38-40 in", length: "28 in" },
+      { size: "L", chest: "41-43 in", length: "29 in" },
+      { size: "XL", chest: "44-46 in", length: "30 in" }
+    ],
+    reviews: [
+      { author: "Noah", rating: 5, comment: "The silhouette is clean and the fabric feels premium." },
+      { author: "Jules", rating: 4, comment: "Looks stylish enough to wear casually." }
+    ]
   },
   {
     id: 7,
@@ -83,7 +166,21 @@ const jerseys = [
     price: 93,
     img: "/images/jerseys/bayern.png",
     sizes: ["S", "M", "L", "XL"],
-    description: "Structured fit and high-contrast trim for a premium look."
+    description: "Structured fit and high-contrast trim for a premium look.",
+    badge: "Top Rated",
+    fit: "Structured athletic fit with balanced stretch.",
+    material: "High-performance polyester knit with matte finish.",
+    shipping: "Ships in 1-2 business days and qualifies for free returns.",
+    sizeGuide: [
+      { size: "S", chest: "35-37 in", length: "27 in" },
+      { size: "M", chest: "38-40 in", length: "28 in" },
+      { size: "L", chest: "41-43 in", length: "29 in" },
+      { size: "XL", chest: "44-46 in", length: "30 in" }
+    ],
+    reviews: [
+      { author: "Felix", rating: 5, comment: "Great details and an excellent fit through the chest." },
+      { author: "Sam", rating: 4, comment: "Very comfortable, especially for training sessions." }
+    ]
   },
   {
     id: 8,
@@ -91,7 +188,20 @@ const jerseys = [
     price: 89,
     img: "/images/jerseys/juventus.png",
     sizes: ["S", "M", "L"],
-    description: "Minimal striped design with breathable all-day comfort."
+    description: "Minimal striped design with breathable all-day comfort.",
+    badge: "Minimalist Choice",
+    fit: "Classic straight fit that sits easily over a tee.",
+    material: "Soft breathable fabric with moisture control.",
+    shipping: "Ships within 48 hours with secure standard delivery.",
+    sizeGuide: [
+      { size: "S", chest: "34-36 in", length: "27 in" },
+      { size: "M", chest: "37-39 in", length: "28 in" },
+      { size: "L", chest: "40-42 in", length: "29 in" }
+    ],
+    reviews: [
+      { author: "Gianni", rating: 5, comment: "Simple, sharp, and really easy to style." },
+      { author: "Reese", rating: 4, comment: "Breathable fabric and clean design." }
+    ]
   },
   {
     id: 9,
@@ -99,7 +209,22 @@ const jerseys = [
     price: 91,
     img: "/images/jerseys/arsenal.png",
     sizes: ["S", "M", "L", "XL", "XXL"],
-    description: "North London-inspired home shirt with a slightly tapered fit."
+    description: "North London-inspired home shirt with a slightly tapered fit.",
+    badge: "Supporter Essential",
+    fit: "Slightly tapered through the waist with comfortable shoulder room.",
+    material: "Flexible knit body with breathable side vents.",
+    shipping: "Ships in 1-2 business days and includes tracked updates.",
+    sizeGuide: [
+      { size: "S", chest: "35-37 in", length: "27 in" },
+      { size: "M", chest: "38-40 in", length: "28 in" },
+      { size: "L", chest: "41-43 in", length: "29 in" },
+      { size: "XL", chest: "44-46 in", length: "30 in" },
+      { size: "XXL", chest: "47-49 in", length: "31 in" }
+    ],
+    reviews: [
+      { author: "Harper", rating: 5, comment: "Excellent fit and the badge work looks great." },
+      { author: "Ben", rating: 4, comment: "Good all-around jersey with a flattering cut." }
+    ]
   }
 ];
 
@@ -134,6 +259,26 @@ app.get('/store', (req, res) => {
     }
 
     res.render('jerseys', { jerseys: filtered, search });
+});
+
+app.get('/product/:id', (req, res) => {
+    const jersey = findJersey(req.params.id);
+
+    if (!jersey) {
+        return res.status(404).send('Product not found');
+    }
+
+    const relatedJerseys = jerseys
+        .filter(item => item.id !== jersey.id)
+        .slice(0, 3);
+
+    const averageRating = jersey.reviews.reduce((sum, review) => sum + review.rating, 0) / jersey.reviews.length;
+
+    res.render('product-detail', {
+        jersey,
+        relatedJerseys,
+        averageRating
+    });
 });
 
 app.get('/wishlist', (req, res) => {
