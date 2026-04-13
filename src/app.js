@@ -96,6 +96,8 @@ app.get('/store', (req, res) => {
     res.render('jerseys', { jerseys: filtered });
 });
 
+let orders = [];
+
 // -------------------- CART --------------------
 
 app.post('/cart/:id', (req, res) => {
@@ -132,14 +134,26 @@ app.get('/checkout', (req, res) => {
     res.render('checkout', { cart });
 });
 
+//Order Page 
+app.get('/orders', (req, res) => {
+    res.render('orders', { orders });
+});
+
 // Place order
 app.post('/checkout', (req, res) => {
     const order = {
-        id: Date.now(),
-        items: cart,
-        total: cart.reduce((sum, item) => sum + item.price, 0),
-        customer: req.body
-    };
+    id: Date.now(),
+    items: [...cart], // 👈 clone cart
+    total: cart.reduce((sum, item) => sum + item.price, 0),
+    customer: req.body,
+    date: new Date()
+};
+
+orders.push(order); // 👈 SAVE ORDER
+
+cart = [];
+
+res.render('confirmation', { order });
 
     console.log("New Order:", order);
 
