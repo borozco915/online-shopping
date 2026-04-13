@@ -19,58 +19,57 @@ const jerseys = [
     id: 1,
     name: "Real Madrid Home Kit",
     price: 90,
-    img: "/images/jerseys/madrid.jpeg"
-    },
-    {
+    img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=60"
+  },
+  {
     id: 2,
     name: "Barcelona Away Kit",
     price: 85,
-    img: "/images/jerseys/barcelona.jpeg"
-    },
-    {
+    img: "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=600&q=60"
+  },
+  {
     id: 3,
     name: "Manchester United Home Kit",
     price: 95,
-    img: "/images/jerseys/united.jpeg"
-    },
-
-    {
+    img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=60"
+  },
+  {
     id: 4,
     name: "Liverpool Home Kit",
     price: 90,
-    img: "/images/jerseys/liverpool.jpeg"
-    },
+    img: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=60"
+  },
   {
     id: 5,
     name: "Chelsea Home Kit",
     price: 88,
-    img: "/images/jerseys/chelsea.jpeg"
-    },
+    img: "https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=600&q=60"
+  },
 
   {
   id: 6,
   name: "Paris Saint-Germain Home Kit",
   price: 92,
-  img: "/images/jerseys/psg.jpeg"
-    },
-  {
+  img: "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?auto=format&fit=crop&w=600&q=60"
+},
+{
   id: 7,
   name: "Bayern Munich Home Kit",
   price: 93,
-  img: "/images/jerseys/bayern.jpeg"
-    },
-  {
+  img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=60"
+},
+{
   id: 8,
   name: "Juventus Home Kit",
   price: 89,
-  img: "/images/jerseys/juventus.jpeg"
-    },
-  {
+  img: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=600&q=60"
+},
+{
   id: 9,
   name: "Arsenal Home Kit",
   price: 91,
-  img: "/images/jerseys/arsenal.jpeg"
-    }
+  img: "https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=600&q=60"
+}
 ];
 
 // -------------------- FRONTEND --------------------
