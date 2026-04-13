@@ -73,3 +73,12 @@ body {
   font-family: monospace;
   letter-spacing: 2px;
 }
+
+.card {
+  border-radius: 15px;
+}
+
+table {
+  border-radius: 10px;
+  overflow: hidden;
+}
