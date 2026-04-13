@@ -92,6 +92,28 @@ table {
     border-radius: 20px;
 }
 
+.navbar-shell {
+  display: grid;
+  grid-template-columns: auto minmax(240px, 360px) 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-search {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.navbar-search .form-control {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.navbar-search .btn {
+  border-radius: 999px;
+  font-weight: 700;
+}
+
 .product-image-button {
   padding: 0;
   border: 0;
@@ -302,7 +324,26 @@ table {
   font-weight: 700;
 }
 
+.product-secondary-actions {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+
+.empty-state-card {
+  border: none;
+  border-radius: 22px;
+}
+
 @media (max-width: 767px) {
+  .navbar-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar-search {
+    width: 100%;
+  }
+
   .product-modal__dialog {
     width: calc(100% - 1rem);
     margin: 0.5rem auto;

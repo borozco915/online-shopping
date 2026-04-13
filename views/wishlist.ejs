@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body class="bg-light">
+
+<%- include('partials/navbar') %>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+            <h2 class="mb-1"><%= title %></h2>
+            <p class="text-muted mb-0">Keep track of jerseys you want to revisit later.</p>
+        </div>
+        <a href="/store" class="btn btn-outline-dark">Back to Search</a>
+    </div>
+
+    <% if (jerseys.length === 0) { %>
+        <div class="card shadow-sm p-4 text-center empty-state-card">
+            <h4 class="mb-2"><%= emptyMessage %></h4>
+            <p class="text-muted mb-0">Use the navbar search to find a jersey and save it here.</p>
+        </div>
+    <% } else { %>
+        <div class="row">
+            <% jerseys.forEach(j => { %>
+                <div class="col-md-4">
+                    <div class="card jersey-card mb-4">
+                        <img src="<%= j.img %>" class="card-img-top jersey-image" alt="<%= j.name %>">
+
+                        <div class="card-body text-center">
+                            <h5><%= j.name %></h5>
+                            <p class="price">$<%= j.price %></p>
+                            <p class="text-muted small"><%= j.description %></p>
+
+                            <form action="/cart/<%= j.id %>" method="POST" class="mb-2">
+                                <input type="hidden" name="size" value="<%= j.sizes[0] %>">
+                                <button class="btn btn-success w-100">Add to Cart</button>
+                            </form>
+
+                            <% if (title === 'Wishlist') { %>
+                                <form action="/wishlist/remove/<%= j.id %>" method="POST">
+                                    <button class="btn btn-outline-danger btn-sm w-100">Remove from Wishlist</button>
+                                </form>
+                            <% } else { %>
+                                <form action="/saved/remove/<%= j.id %>" method="POST">
+                                    <button class="btn btn-outline-secondary btn-sm w-100">Remove from Saved</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+</body>
+</html>

@@ -1,22 +1,28 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container">
+        <div class="navbar-shell w-100">
+            <a href="/" class="navbar-brand">⚽ Jersey Store</a>
 
-        <!-- Brand -->
-        <a href="/" class="navbar-brand">⚽ Jersey Store</a>
+            <form action="/store" method="GET" class="navbar-search">
+                <input
+                    type="search"
+                    name="search"
+                    class="form-control"
+                    placeholder="Search jerseys"
+                    value="<%= searchTerm || '' %>"
+                    aria-label="Search jerseys">
+                <button type="submit" class="btn btn-light">Search</button>
+            </form>
 
-        <!-- Links -->
-        <div class="d-flex gap-2">
-
-            <a href="/" class="btn btn-outline-light">Home</a>
-            <a href="/store" class="btn btn-outline-light">Shop</a>
-            <a href="/orders" class="btn btn-outline-light">📦 Orders</a>
-            <a href="/admin" class="btn btn-outline-info">Admin</a>
-
-            <a href="/cart" class="btn btn-warning">
-                🛒 Cart (<%= typeof cart !== 'undefined' ? cart.length : 0 %>)
-            </a>
-
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <a href="/" class="btn btn-outline-light">Home</a>
+                <a href="/store" class="btn btn-outline-light">Shop</a>
+                <a href="/wishlist" class="btn btn-outline-danger">Wishlist (<%= wishlist.length %>)</a>
+                <a href="/saved" class="btn btn-outline-secondary">Saved (<%= savedForLater.length %>)</a>
+                <a href="/orders" class="btn btn-outline-light">📦 Orders</a>
+                <a href="/admin" class="btn btn-outline-info">Admin</a>
+                <a href="/cart" class="btn btn-warning">🛒 Cart (<%= cart.length %>)</a>
+            </div>
         </div>
-
     </div>
 </nav>

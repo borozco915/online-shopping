@@ -11,6 +11,21 @@ app.use(express.urlencoded({ extended: true }));
 
 // In-memory "database"
 let cart = [];
+let wishlist = [];
+let savedForLater = [];
+let orders = [];
+
+function findJersey(id) {
+    return jerseys.find(jersey => jersey.id === Number(id));
+}
+
+function addUniqueItem(collection, jersey) {
+    const exists = collection.some(item => item.id === jersey.id);
+
+    if (!exists) {
+        collection.push(jersey);
+    }
+}
 
 const jerseys = [
   {
@@ -88,6 +103,14 @@ const jerseys = [
   }
 ];
 
+app.use((req, res, next) => {
+    res.locals.cart = cart;
+    res.locals.wishlist = wishlist;
+    res.locals.savedForLater = savedForLater;
+    res.locals.searchTerm = req.query.search || '';
+    next();
+});
+
 // -------------------- FRONTEND --------------------
 
 app.get("/", (req, res) => {
@@ -102,22 +125,63 @@ app.get('/jerseys', (req, res) => {
 
 app.get('/store', (req, res) => {
     let filtered = jerseys;
+    const search = (req.query.search || '').trim();
 
-    if (req.query.search) {
+    if (search) {
         filtered = jerseys.filter(j =>
-            j.name.toLowerCase().includes(req.query.search.toLowerCase())
+            j.name.toLowerCase().includes(search.toLowerCase())
         );
     }
 
-    res.render('jerseys', { jerseys: filtered });
+    res.render('jerseys', { jerseys: filtered, search });
 });
 
-let orders = [];
+app.get('/wishlist', (req, res) => {
+    res.render('wishlist', { jerseys: wishlist, title: 'Wishlist', emptyMessage: 'Your wishlist is empty.' });
+});
+
+app.get('/saved', (req, res) => {
+    res.render('wishlist', {
+        jerseys: savedForLater,
+        title: 'Saved For Later',
+        emptyMessage: 'You have not saved any jerseys for later yet.'
+    });
+});
+
+app.post('/wishlist/:id', (req, res) => {
+    const jersey = findJersey(req.params.id);
+
+    if (jersey) {
+        addUniqueItem(wishlist, jersey);
+    }
+
+    res.redirect(req.get('referer') || '/store');
+});
+
+app.post('/saved/:id', (req, res) => {
+    const jersey = findJersey(req.params.id);
+
+    if (jersey) {
+        addUniqueItem(savedForLater, jersey);
+    }
+
+    res.redirect(req.get('referer') || '/store');
+});
+
+app.post('/wishlist/remove/:id', (req, res) => {
+    wishlist = wishlist.filter(item => item.id !== Number(req.params.id));
+    res.redirect('/wishlist');
+});
+
+app.post('/saved/remove/:id', (req, res) => {
+    savedForLater = savedForLater.filter(item => item.id !== Number(req.params.id));
+    res.redirect('/saved');
+});
 
 // -------------------- CART --------------------
 
 app.post('/cart/:id', (req, res) => {
-    const jersey = jerseys.find(j => j.id == req.params.id);
+    const jersey = findJersey(req.params.id);
     const selectedSize = req.body.size || jersey.sizes[0];
 
     const item = cart.find(i => i.id == jersey.id && i.size === selectedSize);
