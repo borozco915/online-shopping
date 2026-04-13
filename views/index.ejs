@@ -20,7 +20,6 @@
 <%- include('partials/navbar') %>
 
 <div class="container mt-5">
-    <!-- ✅ ADD THIS BLOCK RIGHT HERE -->
     <% if (query && query.added) { %>
       <div class="alert alert-success text-center">
         Item added to cart!
@@ -36,10 +35,21 @@
         <% jerseys.forEach(j => { %>
             <div class="col-md-4">
                 <div class="card jersey-card mb-4">
-                    
-                    <img src="<%= j.img || 'https://via.placeholder.com/300' %>" 
-                         class="card-img-top" 
-                         style="height:250px; object-fit:cover;">
+                    <button
+                        type="button"
+                        class="product-image-button"
+                        data-product-trigger
+                        data-id="<%= j.id %>"
+                        data-name="<%= j.name %>"
+                        data-price="<%= j.price %>"
+                        data-img="<%= j.img || 'https://via.placeholder.com/300' %>"
+                        data-description="<%= j.description %>"
+                        data-sizes="<%= j.sizes.join(',') %>"
+                        aria-label="Open details for <%= j.name %>">
+                        <img src="<%= j.img || 'https://via.placeholder.com/300' %>" 
+                             class="card-img-top jersey-image"
+                             alt="<%= j.name %>">
+                    </button>
 
                     <div class="card-body text-center">
                         <h5><%= j.name %></h5>
@@ -55,6 +65,9 @@
     </div>
 
 </div>
+
+<%- include('partials/product-modal') %>
+<script src="/product-actions.js"></script>
 
 </body>
 </html>

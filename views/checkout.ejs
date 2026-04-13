@@ -118,8 +118,8 @@ document.querySelector("form").addEventListener("submit", (e) => {
 
                 <% cart.forEach(item => { %>
                     <div class="d-flex justify-content-between mb-2">
-                        <span><%= item.name %></span>
-                        <span>$<%= item.price %></span>
+                        <span><%= item.name %> (<%= item.size || 'Standard' %>) x <%= item.qty || 1 %></span>
+                        <span>$<%= item.price * (item.qty || 1) %></span>
                     </div>
                 <% }) %>
 
@@ -128,7 +128,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Total</span>
                     <span>
-                        $<%= cart.reduce((sum, item) => sum + item.price, 0) %>
+                        $<%= cart.reduce((sum, item) => sum + (item.price * (item.qty || 1)), 0) %>
                     </span>
                 </div>
 

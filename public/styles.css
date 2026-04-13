@@ -91,3 +91,237 @@ table {
 .navbar .btn {
     border-radius: 20px;
 }
+
+.product-image-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+}
+
+.jersey-image {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.product-image-button:focus-visible {
+  outline: 3px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.product-modal[hidden] {
+  display: none;
+}
+
+.product-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+}
+
+.product-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 13, 28, 0.7);
+  backdrop-filter: blur(6px);
+}
+
+.product-modal__dialog {
+  position: relative;
+  width: min(960px, calc(100% - 2rem));
+  margin: 3rem auto;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 24px 80px rgba(17, 24, 39, 0.22);
+  overflow: hidden;
+}
+
+.product-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #102033;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.product-modal__content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 580px;
+}
+
+.product-visual {
+  padding: 2.5rem;
+  background:
+    radial-gradient(circle at top, rgba(28, 144, 255, 0.18), transparent 35%),
+    linear-gradient(155deg, #eef4ff 0%, #f7f9fc 100%);
+}
+
+.product-visual__stage {
+  min-height: 380px;
+  display: grid;
+  place-items: center;
+  perspective: 1400px;
+}
+
+.product-visual__ring {
+  --spin-angle: 0deg;
+  width: min(100%, 360px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.95), rgba(229, 236, 246, 0.8));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 22px 50px rgba(18, 39, 71, 0.12);
+  transform-style: preserve-3d;
+}
+
+.product-visual__image {
+  width: 74%;
+  max-height: 290px;
+  object-fit: contain;
+  transform: rotateY(var(--spin-angle));
+  transition: transform 120ms linear;
+  filter: drop-shadow(0 28px 28px rgba(12, 33, 68, 0.2));
+}
+
+.product-visual__controls {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.product-visual__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.product-visual__label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #36598c;
+}
+
+.product-visual__hint {
+  color: #5d6f84;
+  font-size: 0.95rem;
+}
+
+#spin-toggle.is-active {
+  background: #102033;
+  color: #fff;
+  border-color: #102033;
+}
+
+.product-details {
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-details__eyebrow {
+  color: #36598c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.product-details__price {
+  margin-bottom: 1rem;
+  color: #0a7a35;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.product-details__description {
+  color: #516175;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.product-details__section-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.product-details__selected {
+  color: #36598c;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.size-option {
+  min-width: 52px;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #c9d4e2;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+  color: #102033;
+  transition: all 0.2s ease;
+}
+
+.size-option:hover,
+.size-option.is-selected {
+  border-color: #102033;
+  background: #102033;
+  color: #fff;
+}
+
+.product-details__cta {
+  padding: 0.9rem 1.2rem;
+  border-radius: 14px;
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  .product-modal__dialog {
+    width: calc(100% - 1rem);
+    margin: 0.5rem auto;
+  }
+
+  .product-modal__content {
+    grid-template-columns: 1fr;
+  }
+
+  .product-visual,
+  .product-details {
+    padding: 1.5rem;
+  }
+
+  .product-visual__stage {
+    min-height: 280px;
+  }
+
+  .product-visual__image {
+    max-height: 220px;
+  }
+}
