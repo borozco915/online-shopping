@@ -19,57 +19,57 @@ const jerseys = [
     id: 1,
     name: "Real Madrid Home Kit",
     price: 90,
-    img: "/images/jerseys/madrid.jpg"
+    img: "/images/jerseys/madrid.jpeg"
     },
     {
     id: 2,
     name: "Barcelona Away Kit",
     price: 85,
-    img: "/images/jerseys/barcelona.jpg"
+    img: "/images/jerseys/barcelona.jpeg"
     },
     {
     id: 3,
     name: "Manchester United Home Kit",
     price: 95,
-    img: "/images/jerseys/united.jpg"
+    img: "/images/jerseys/united.jpeg"
     },
 
     {
     id: 4,
     name: "Liverpool Home Kit",
     price: 90,
-    img: "/images/jerseys/liverpool.jpg"
+    img: "/images/jerseys/liverpool.jpeg"
     },
   {
     id: 5,
     name: "Chelsea Home Kit",
     price: 88,
-    img: "/images/jerseys/chelsea.jpg"
+    img: "/images/jerseys/chelsea.jpeg"
     },
 
   {
   id: 6,
   name: "Paris Saint-Germain Home Kit",
   price: 92,
-  img: "/images/jerseys/psg.jpg"
+  img: "/images/jerseys/psg.jpeg"
     },
   {
   id: 7,
   name: "Bayern Munich Home Kit",
   price: 93,
-  img: "/images/jerseys/bayern.jpg"
+  img: "/images/jerseys/bayern.jpeg"
     },
   {
   id: 8,
   name: "Juventus Home Kit",
   price: 89,
-  img: "/images/jerseys/juventus.jpg"
+  img: "/images/jerseys/juventus.jpeg"
     },
   {
   id: 9,
   name: "Arsenal Home Kit",
   price: 91,
-  img: "/images/jerseys/arsenal.jpg"
+  img: "/images/jerseys/arsenal.jpeg"
     }
 ];
 
