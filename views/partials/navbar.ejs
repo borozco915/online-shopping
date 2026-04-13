@@ -1,0 +1,22 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+
+        <!-- Brand -->
+        <a href="/" class="navbar-brand">⚽ Jersey Store</a>
+
+        <!-- Links -->
+        <div class="d-flex gap-2">
+
+            <a href="/" class="btn btn-outline-light">Home</a>
+            <a href="/store" class="btn btn-outline-light">Shop</a>
+            <a href="/orders" class="btn btn-outline-light">📦 Orders</a>
+            <a href="/admin" class="btn btn-outline-info">Admin</a>
+
+            <a href="/cart" class="btn btn-warning">
+                🛒 Cart (<%= typeof cart !== 'undefined' ? cart.length : 0 %>)
+            </a>
+
+        </div>
+
+    </div>
+</nav>
